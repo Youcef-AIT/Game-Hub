@@ -5,10 +5,12 @@ interface Props {
 }
 
 const CriticScore = ({ metacritic }: Props) => {
+    let color = metacritic >= 80 ? "green" : metacritic >= 40 && metacritic < 80 ? "yellow" : "red";
+
     return (
-        <Badge paddingX={3} color={"green"} bg={metacritic >= 80 ? "green.600" : metacritic >= 40 && metacritic < 80 ? "yellow" : "red"}>
+        <Badge paddingX={3} colorScheme={color}>
             {metacritic}
-        </Badge>
+        </Badge>   
     );
 };
 
