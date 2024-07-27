@@ -4,7 +4,7 @@ import ToggleMode from "./ToggleMode";
 
 const Navbar = () => {
     return (
-        <HStack>
+        <HStack justifyContent={"space-between"}> 
             <Image src={logo} boxSize="60px" />
             <ToggleMode />
         </HStack>
