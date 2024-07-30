@@ -2,8 +2,13 @@ import { Grid, GridItem, HStack, Show } from "@chakra-ui/react";
 import Navbar from "./components/Navbar";
 import GameGrid from "./components/GameGrid";
 import GenresList from "./components/GenresList";
+import PlatformsList from "./components/PlatformsList";
+import { useState } from "react";
+import { genre } from "./hooks/useGeneres";
 
 function App() {
+    
+
     return (
         <>
             <Grid
@@ -25,6 +30,7 @@ function App() {
                     </GridItem>
                 </Show>
                 <GridItem area={"main"}>
+                    <PlatformsList/>
                     <GameGrid />
                 </GridItem>
             </Grid>
