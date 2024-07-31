@@ -4,17 +4,26 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { Platform } from "../hooks/useGames";
 import usePlatform from "../hooks/usePlatform";
 
-const PlatformsList = () => {
+interface Props {
+    onSelectPlatform: (platform: Platform) => void;
+    selectedPlatform: Platform | null;
+}
+
+const PlatformsList = ({ onSelectPlatform, selectedPlatform }: Props) => {
     const { data } = usePlatform();
 
     return (
         <Menu>
             <MenuButton as={Button} rightIcon={<MdOutlineKeyboardArrowDown />}>
-                Platforms
+                {selectedPlatform?.name || "platform"}
             </MenuButton>
             <MenuList>
                 {data.map((platform) => {
-                    return <MenuItem key={platform.id}>{platform.name}</MenuItem>;
+                    return (
+                        <MenuItem onClick={() => onSelectPlatform(platform)} key={platform.id}>
+                            {platform.name}
+                        </MenuItem>
+                    );
                 })}
             </MenuList>
         </Menu>

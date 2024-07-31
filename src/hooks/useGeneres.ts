@@ -1,6 +1,7 @@
 import { useData } from "./useData";
 
 export interface genre {
+    image_background: any;
     id: number;
     name: string;
 }
