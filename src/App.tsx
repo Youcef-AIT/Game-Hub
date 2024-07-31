@@ -6,10 +6,14 @@ import PlatformsList from "./components/PlatformsList";
 import { useState } from "react";
 import { genre } from "./hooks/useGeneres";
 import { Platform } from "./hooks/useGames";
+import OrderSelector from "./components/OrderSelector";
+import "./App.css";
 
 export interface GameQuery {
     genre: genre | null;
     platform: Platform | null;
+    order: string;
+    searchInputValue: string;
 }
 
 function App() {
@@ -28,7 +32,7 @@ function App() {
                 }}
             >
                 <GridItem area={"nav"}>
-                    <Navbar />
+                    <Navbar onselect={(searchInputValue) => setGameQuery({ ...gameQuery, searchInputValue })} />
                 </GridItem>
                 <Show above="lg">
                     <GridItem area={"aside"}>
@@ -36,7 +40,10 @@ function App() {
                     </GridItem>
                 </Show>
                 <GridItem area={"main"}>
-                    <PlatformsList onSelectPlatform={(platform) => setGameQuery({ ...gameQuery, platform })} selectedPlatform={gameQuery.platform} />
+                    <HStack>
+                        <PlatformsList onSelectPlatform={(platform) => setGameQuery({ ...gameQuery, platform })} selectedPlatform={gameQuery.platform} />
+                        <OrderSelector selectedOrder={gameQuery.order} onSelectOrder={(order) => setGameQuery({ ...gameQuery, order })} />
+                    </HStack>
                     <GameGrid gameQuery={gameQuery} />
                 </GridItem>
             </Grid>
