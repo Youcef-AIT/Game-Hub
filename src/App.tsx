@@ -33,7 +33,7 @@ function App() {
                 }}
             >
                 <GridItem area={"nav"}>
-                    <Navbar onselect={(searchInputValue) => setGameQuery({ ...gameQuery, searchInputValue })} />
+                    <Navbar onselecet={(searchInputValue) => setGameQuery({ ...gameQuery, searchInputValue })} />
                 </GridItem>
                 <Show above="lg">
                     <GridItem area={"aside"}>

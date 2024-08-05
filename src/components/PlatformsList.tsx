@@ -1,5 +1,5 @@
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
-import React from "react";
+
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { Platform } from "../hooks/useGames";
 import usePlatform from "../hooks/usePlatform";

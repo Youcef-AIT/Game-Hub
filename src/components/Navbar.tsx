@@ -1,17 +1,17 @@
 import { HStack, Image, Text } from "@chakra-ui/react";
 import logo from "../assets/logo.webp";
+import SearchBar from "./SearchBar";
 import ToggleMode from "./ToggleMode";
-import SearchInput from "./SearchInput";
 
 interface Props {
-    onselect: (value: string) => void;
+    onselecet: (value: string) => void;
 }
 
-const Navbar = ({ onselect }: Props) => {
+const Navbar = ({onselecet} : Props) => {
     return (
         <HStack padding={4}>
             <Image src={logo} boxSize="60px" />
-            <SearchInput onselect={onselect} />
+            <SearchBar onselecet={onselecet} />
             <ToggleMode />
         </HStack>
     );
