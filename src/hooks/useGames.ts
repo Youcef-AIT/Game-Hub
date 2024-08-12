@@ -1,9 +1,6 @@
-import { useContext, useEffect, useState } from "react";
-import apiClient from "../services/api-client";
-import { CanceledError } from "axios";
-import { useData } from "./useData";
-import { genre } from "./useGeneres";
+import { useQuery } from "@tanstack/react-query";
 import { GameQuery } from "../App";
+import APIClient, { dataShape } from "../services/api-client";
 
 export interface Platform {
     id: number;
@@ -20,16 +17,18 @@ export interface Games {
     rating_top: number;
 }
 
+const apiClient = new APIClient<dataShape<Games>>("/games");
+
 export const useGames = (gameQuery: GameQuery) =>
-    useData<Games>(
-        "/games",
-        {
-            params: {
-                genres: gameQuery.genre?.id,
-                parent_platforms: gameQuery.platform?.id,
-                ordering: gameQuery.order,
-                search: gameQuery.searchInputValue,
-            },
-        },
-        [gameQuery]
-    );
+    useQuery<dataShape<Games>, Error>({
+        queryKey: ["games", gameQuery],
+        queryFn: () =>
+            apiClient.getAll({
+                params: {
+                    genres: gameQuery.genre?.id,
+                    parent_platforms: gameQuery.platform?.id,
+                    ordering: gameQuery.order,
+                    search: gameQuery.searchInputValue,
+                },
+            }),
+    });

@@ -1,6 +1,5 @@
 import { Button, HStack, Image, Link, List, ListItem } from "@chakra-ui/react";
 import { genre, useGenres } from "../hooks/useGeneres";
-import { useState } from "react";
 import { getCropedUrl } from "../services/image-url-mod";
 
 interface Props {
@@ -12,7 +11,7 @@ const GenresList = ({ selectedGenre, onselect }: Props) => {
     const { data } = useGenres();
     return (
         <List>
-            {data.map((genre) => {
+            {data?.results.map((genre) => {
                 return (
                     <ListItem key={genre.id} padding={1}>
                         <HStack spacing={4}>

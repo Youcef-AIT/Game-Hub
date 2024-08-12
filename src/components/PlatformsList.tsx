@@ -1,5 +1,4 @@
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
-
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { Platform } from "../hooks/useGames";
 import usePlatform from "../hooks/usePlatform";
@@ -18,7 +17,7 @@ const PlatformsList = ({ onSelectPlatform, selectedPlatform }: Props) => {
                 {selectedPlatform?.name || "platform"}
             </MenuButton>
             <MenuList>
-                {data.map((platform) => {
+                {data?.results.map((platform) => {
                     return (
                         <MenuItem onClick={() => onSelectPlatform(platform)} key={platform.id}>
                             {platform.name}

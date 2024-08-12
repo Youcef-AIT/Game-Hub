@@ -1,4 +1,6 @@
-import GenresData from "../Data/ganre";
+import { useQuery } from "@tanstack/react-query";
+import { dataShape } from "../services/api-client";
+import APIclient from "../services/api-client";
 
 export interface genre {
     image_background: string;
@@ -6,4 +8,10 @@ export interface genre {
     name: string;
 }
 
-export const useGenres = () => ({ data: GenresData, isLoading: false, error: null });
+const apiClient = new APIclient<dataShape<genre>>("/genres");
+
+export const useGenres = () =>
+    useQuery<dataShape<genre>, Error>({
+        queryKey: ["genre"],
+        queryFn: () => apiClient.getAll(),
+    });
