@@ -1,7 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { GameQuery } from "../App";
 import APIClient, { dataShape } from "../services/api-client";
-import { Platform } from "./usePlatform";
+import { Platform } from "./usePlatforms";
+import { first } from "lodash";
 
 export interface Games {
     id: number;
@@ -15,15 +16,20 @@ export interface Games {
 const apiClient = new APIClient<dataShape<Games>>("/games");
 
 export const useGames = (gameQuery: GameQuery) =>
-    useQuery<dataShape<Games>, Error>({
+    useInfiniteQuery<dataShape<Games>, Error>({
         queryKey: ["games", gameQuery],
-        queryFn: () =>
+        queryFn: ({ pageParam = 1 }) =>
             apiClient.getAll({
                 params: {
-                    genres: gameQuery.genre?.id,
-                    parent_platforms: gameQuery.platform?.id,
+                    page: pageParam,
+                    genres: gameQuery.genreId,
+                    parent_platforms: gameQuery.platformId,
                     ordering: gameQuery.order,
                     search: gameQuery.searchInputValue,
                 },
             }),
+        getNextPageParam: (lastPage, allPages) => {
+            return lastPage.next ? allPages.length + 1 : undefined;
+        },
+        staleTime: 24 * 60 * 60 * 1000, // 24H
     });

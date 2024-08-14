@@ -1,19 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
-import { dataShape } from "../services/api-client";
-import APIclient from "../services/api-client";
+import usePlatforms from "./usePlatforms";
 
-export interface Platform {
-    id: number;
-    name: string;
-    slug: string;
-}
+const usePlatform = (platformId?: number) => {
+    const { data: platforms } = usePlatforms();
 
-const apiClient = new APIclient<dataShape<Platform>>("/platforms/lists/parents");
-
-const usePlatform = () =>
-    useQuery<dataShape<Platform>, Error>({
-        queryKey: ["platforms"],
-        queryFn: apiClient.getAll,
-    });
+    const selectedPlatform = platforms?.results.find((Platform) => Platform.id === platformId);
+    return selectedPlatform ? selectedPlatform.name : "";
+};
 
 export default usePlatform;

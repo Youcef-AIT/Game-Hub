@@ -1,7 +1,7 @@
 import { FaXbox, FaPlaystation, FaWindows, FaApple, FaAndroid, FaLinux, FaGlobe } from "react-icons/fa";
 import { BsNintendoSwitch } from "react-icons/bs";
 import { MdPhoneIphone } from "react-icons/md";
-import { Platform } from "../hooks/usePlatform";
+import { Platform } from "../hooks/usePlatforms";
 import { IconType } from "react-icons";
 import { HStack, Icon } from "@chakra-ui/react";
 

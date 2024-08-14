@@ -4,10 +4,10 @@ import { getCropedUrl } from "../services/image-url-mod";
 
 interface Props {
     onselect: (genre: genre) => void;
-    selectedGenre: genre | null;
+    selectedGenreId?: number;
 }
 
-const GenresList = ({ selectedGenre, onselect }: Props) => {
+const GenresList = ({ selectedGenreId, onselect }: Props) => {
     const { data } = useGenres();
     return (
         <List>
@@ -16,14 +16,7 @@ const GenresList = ({ selectedGenre, onselect }: Props) => {
                     <ListItem key={genre.id} padding={1}>
                         <HStack spacing={4}>
                             <Image src={getCropedUrl(genre.image_background)} boxSize={10} objectFit={"cover"} borderRadius={10} />
-                            <Button
-                                textAlign={"left"}
-                                whiteSpace={"wrap"}
-                                colorScheme={genre.id === selectedGenre?.id ? "green" : "white"}
-                                variant="link"
-                                key={genre.id}
-                                onClick={() => onselect(genre)}
-                            >
+                            <Button textAlign={"left"} whiteSpace={"wrap"} colorScheme={genre.id === selectedGenreId ? "green" : "white"} variant="link" key={genre.id} onClick={() => onselect(genre)}>
                                 {genre.name}
                             </Button>
                         </HStack>

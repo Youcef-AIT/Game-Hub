@@ -8,13 +8,14 @@ import Navbar from "./components/Navbar";
 import OrderSelector from "./components/OrderSelector";
 import PlatformsList from "./components/PlatformsList";
 import { genre } from "./hooks/useGeneres";
-import { Platform } from "./hooks/usePlatform";
+import { Platform } from "./hooks/usePlatforms";
 
 export interface GameQuery {
-    genre: genre | null;
-    platform: Platform | null;
+    genreId?: number;
+    platformId?: number;
     order: string;
     searchInputValue: string;
+    pageSize: number;
 }
 
 function App() {
@@ -37,14 +38,15 @@ function App() {
                 </GridItem>
                 <Show above="lg">
                     <GridItem area={"aside"}>
-                        <GenresList onselect={(genre) => setGameQuery({ ...gameQuery, genre })} selectedGenre={gameQuery.genre} />
+                        <GenresList onselect={(genre) => setGameQuery({ ...gameQuery, genreId: genre.id })} selectedGenreId={gameQuery.genreId} />
                     </GridItem>
                 </Show>
                 <GridItem area={"main"}>
                     <VStack marginBottom="10px" spacing={4}>
                         <HeadingTitle HeadingSelection={gameQuery} />
                         <HStack>
-                            <PlatformsList onSelectPlatform={(platform) => setGameQuery({ ...gameQuery, platform })} selectedPlatform={gameQuery.platform} />
+                            <PlatformsList onSelectPlatform={(platform) => setGameQuery({ ...gameQuery, platformId: platform.id })} selectedPlatformId={gameQuery.platformId} />
+
                             <OrderSelector selectedOrder={gameQuery.order} onSelectOrder={(order) => setGameQuery({ ...gameQuery, order })} />
                         </HStack>
                     </VStack>

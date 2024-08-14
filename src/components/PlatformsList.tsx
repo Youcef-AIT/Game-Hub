@@ -1,15 +1,16 @@
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 
-import usePlatform, { Platform } from "../hooks/usePlatform";
-
+import usePlatforms, { Platform } from "../hooks/usePlatforms";
 interface Props {
     onSelectPlatform: (platform: Platform) => void;
-    selectedPlatform: Platform | null;
+    selectedPlatformId?: number;
 }
 
-const PlatformsList = ({ onSelectPlatform, selectedPlatform }: Props) => {
-    const { data } = usePlatform();
+const PlatformsList = ({ onSelectPlatform, selectedPlatformId }: Props) => {
+    const { data } = usePlatforms();
+
+    const selectedPlatform = data?.results.find((platform) => platform.id === selectedPlatformId);
 
     return (
         <Menu>
