@@ -1,7 +1,10 @@
 import axios, { AxiosRequestConfig } from "axios";
+import { number } from "prop-types";
 
 export interface dataShape<T> {
     count: number;
+    next: string | null;
+    previous: string | null;
     results: T[];
 }
 
