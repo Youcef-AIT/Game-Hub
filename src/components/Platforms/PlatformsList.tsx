@@ -1,14 +1,14 @@
-import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
-import { MdOutlineKeyboardArrowDown } from "react-icons/md";
+import {Button, Menu, MenuButton, MenuItem, MenuList} from "@chakra-ui/react";
+import {MdOutlineKeyboardArrowDown} from "react-icons/md";
 
-import usePlatforms, { Platform } from "../hooks/usePlatforms";
+import usePlatforms, {Platform} from "../../hooks/usePlatforms";
 interface Props {
     onSelectPlatform: (platform: Platform) => void;
     selectedPlatformId?: number;
 }
 
-const PlatformsList = ({ onSelectPlatform, selectedPlatformId }: Props) => {
-    const { data } = usePlatforms();
+const PlatformsList = ({onSelectPlatform, selectedPlatformId}: Props) => {
+    const {data} = usePlatforms();
 
     const selectedPlatform = data?.results.find((platform) => platform.id === selectedPlatformId);
 
