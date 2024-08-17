@@ -1,18 +1,17 @@
-import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
-import { useRef } from "react";
-import { CiSearch } from "react-icons/ci";
+import {Input, InputGroup, InputLeftElement} from "@chakra-ui/react";
+import {useRef} from "react";
+import {CiSearch} from "react-icons/ci";
+import useGameQueryStore from "../Games/Store";
 
-interface Props {
-    onselecet: (value: string) => void;
-}
-
-const SearchBar = ({ onselecet }: Props) => {
+const SearchBar = () => {
     const inputRef = useRef<HTMLInputElement>(null);
+
+    const setSearchInput  = useGameQueryStore((s) => s.setSearchInput);
     return (
         <form
             onSubmit={(e) => {
                 e.preventDefault();
-                if (inputRef.current) onselecet(inputRef.current.value);
+                if (inputRef.current) setSearchInput(inputRef.current.value);
             }}
         >
             <InputGroup rounded={"lg"}>

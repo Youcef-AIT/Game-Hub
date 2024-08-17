@@ -32,38 +32,22 @@ function App() {
                 }}
             >
                 <GridItem area={"nav"}>
-                    <Navbar
-                        onselecet={(searchInputValue) =>
-                            setGameQuery({...gameQuery, searchInputValue})
-                        }
-                    />
+                    <Navbar />
                 </GridItem>
                 <Show above="lg">
                     <GridItem area={"aside"}>
-                        <GenresList
-                            onselect={(genre) => setGameQuery({...gameQuery, genreId: genre.id})}
-                            selectedGenreId={gameQuery.genreId}
-                        />
+                        <GenresList />
                     </GridItem>
                 </Show>
                 <GridItem area={"main"}>
                     <VStack marginBottom="10px" spacing={4}>
-                        <HeadingTitle HeadingSelection={gameQuery} />
+                        <HeadingTitle />
                         <HStack>
-                            <PlatformsList
-                                onSelectPlatform={(platform) =>
-                                    setGameQuery({...gameQuery, platformId: platform.id})
-                                }
-                                selectedPlatformId={gameQuery.platformId}
-                            />
-
-                            <OrderSelector
-                                selectedOrder={gameQuery.order}
-                                onSelectOrder={(order) => setGameQuery({...gameQuery, order})}
-                            />
+                            <PlatformsList />
+                            <OrderSelector />
                         </HStack>
                     </VStack>
-                    <GameGrid gameQuery={gameQuery} />
+                    <GameGrid />
                 </GridItem>
             </Grid>
         </>

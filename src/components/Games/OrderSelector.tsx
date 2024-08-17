@@ -1,23 +1,22 @@
-import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
-import { MdOutlineKeyboardArrowDown } from "react-icons/md";
+import {Button, Menu, MenuButton, MenuItem, MenuList} from "@chakra-ui/react";
+import {MdOutlineKeyboardArrowDown} from "react-icons/md";
+import useGameQueryStore from "./Store";
 
-interface Props {
-    onSelectOrder: (order: string) => void;
-    selectedOrder: string;
-}
+const OrderSelector = () => {
+    const order = useGameQueryStore((s) => s.gamequery.order);
+    const setOrder = useGameQueryStore((s) => s.setOrder);
 
-const OrderSelector = ({ onSelectOrder, selectedOrder }: Props) => {
     const sortList = [
-        { value: "", label: "Revelence" },
-        { value: "name", label: "Name" },
-        { value: "-metacritic", label: "Critic Score" },
-        { value: "-released", label: "Realease Date" },
-        { value: "-rating", label: "Rating" },
-        { value: "-added", label: "Added Date" },
-        { value: "-updated", label: "Updated Date" },
+        {value: "", label: "Revelence"},
+        {value: "name", label: "Name"},
+        {value: "-metacritic", label: "Critic Score"},
+        {value: "-released", label: "Realease Date"},
+        {value: "-rating", label: "Rating"},
+        {value: "-added", label: "Added Date"},
+        {value: "-updated", label: "Updated Date"},
     ];
 
-    const orderType = sortList.find((item) => item.value === selectedOrder);
+    const orderType = sortList.find((item) => item.value === order);
 
     return (
         <Menu>
@@ -27,7 +26,11 @@ const OrderSelector = ({ onSelectOrder, selectedOrder }: Props) => {
             <MenuList>
                 {sortList.map((item) => {
                     return (
-                        <MenuItem key={item.value} onClick={() => onSelectOrder(item.value)} value={item.value}>
+                        <MenuItem
+                            key={item.value}
+                            onClick={() => setOrder(item.value)}
+                            value={item.value}
+                        >
                             {item.label}
                         </MenuItem>
                     );

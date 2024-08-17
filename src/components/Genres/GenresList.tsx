@@ -1,13 +1,12 @@
 import {Button, HStack, Image, Link, List, ListItem} from "@chakra-ui/react";
 import {genre, useGenres} from "../../hooks/useGeneres";
 import {getCropedUrl} from "../../services/image-url-mod";
+import useGameQueryStore from "../Games/Store";
 
-interface Props {
-    onselect: (genre: genre) => void;
-    selectedGenreId?: number;
-}
+const GenresList = () => {
+    const setGenreId = useGameQueryStore((s) => s.setGenreId);
+    const genreId = useGameQueryStore((s) => s.gamequery.genreId);
 
-const GenresList = ({selectedGenreId, onselect}: Props) => {
     const {data} = useGenres();
     return (
         <List>
@@ -24,10 +23,10 @@ const GenresList = ({selectedGenreId, onselect}: Props) => {
                             <Button
                                 textAlign={"left"}
                                 whiteSpace={"wrap"}
-                                colorScheme={genre.id === selectedGenreId ? "green" : "white"}
+                                colorScheme={genre.id === genreId ? "green" : "white"}
                                 variant="link"
                                 key={genre.id}
-                                onClick={() => onselect(genre)}
+                                onClick={() => setGenreId(genre.id)}
                             >
                                 {genre.name}
                             </Button>

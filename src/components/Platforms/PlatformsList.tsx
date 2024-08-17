@@ -2,15 +2,15 @@ import {Button, Menu, MenuButton, MenuItem, MenuList} from "@chakra-ui/react";
 import {MdOutlineKeyboardArrowDown} from "react-icons/md";
 
 import usePlatforms, {Platform} from "../../hooks/usePlatforms";
-interface Props {
-    onSelectPlatform: (platform: Platform) => void;
-    selectedPlatformId?: number;
-}
+import useGameQueryStore from "../Games/Store";
 
-const PlatformsList = ({onSelectPlatform, selectedPlatformId}: Props) => {
+const PlatformsList = () => {
+    const platformId = useGameQueryStore((s) => s.gamequery.platformId);
+    const setPlatformId = useGameQueryStore((s) => s.setPlatformId);
+
     const {data} = usePlatforms();
 
-    const selectedPlatform = data?.results.find((platform) => platform.id === selectedPlatformId);
+    const selectedPlatform = data?.results.find((platform) => platform.id === platformId);
 
     return (
         <Menu>
@@ -20,7 +20,7 @@ const PlatformsList = ({onSelectPlatform, selectedPlatformId}: Props) => {
             <MenuList>
                 {data?.results.map((platform) => {
                     return (
-                        <MenuItem onClick={() => onSelectPlatform(platform)} key={platform.id}>
+                        <MenuItem onClick={() => setPlatformId(platform.id)} key={platform.id}>
                             {platform.name}
                         </MenuItem>
                     );
