@@ -5,12 +5,11 @@ import usePlatforms, {Platform} from "../../hooks/usePlatforms";
 import useGameQueryStore from "../Games/Store";
 
 const PlatformsList = () => {
-    const platformId = useGameQueryStore((s) => s.gamequery.platformId);
-    const setPlatformId = useGameQueryStore((s) => s.setPlatformId);
+    const {gamequery, setPlatformId} = useGameQueryStore();
 
     const {data} = usePlatforms();
 
-    const selectedPlatform = data?.results.find((platform) => platform.id === platformId);
+    const selectedPlatform = data?.results.find((platform) => platform.id === gamequery.platformId);
 
     return (
         <Menu>
