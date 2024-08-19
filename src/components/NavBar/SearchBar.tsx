@@ -6,13 +6,14 @@ import useGameQueryStore from "../Games/Store";
 const SearchBar = () => {
     const inputRef = useRef<HTMLInputElement>(null);
 
-    const setSearchInput  = useGameQueryStore((s) => s.setSearchInput);
+    const setSearchInput = useGameQueryStore((s) => s.setSearchInput);
     return (
-        <form
+        <form 
             onSubmit={(e) => {
                 e.preventDefault();
                 if (inputRef.current) setSearchInput(inputRef.current.value);
             }}
+            style={{width : '100%'}}
         >
             <InputGroup rounded={"lg"}>
                 <InputLeftElement pointerEvents="none">
