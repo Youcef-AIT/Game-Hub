@@ -1,24 +1,19 @@
-import { Heading, SimpleGrid, Text } from "@chakra-ui/react";
+import {Heading, SimpleGrid, Text} from "@chakra-ui/react";
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useGames } from "../../hooks/useGames";
+import {useGames} from "../../hooks/useGames";
 import CardContainer from "./CardContainer";
 import GameCard from "./GameCard";
 import SkiletonCard from "./SkiletonCard";
 
 const GameGrid = () => {
-    
-
-    
-    const {data, error, isLoading, fetchNextPage, isFetchingNextPage, hasNextPage} =
-        useGames();
+    const {data, error, isLoading, fetchNextPage, isFetchingNextPage, hasNextPage} = useGames();
     const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
     if (error) {
         return <Text>{error.message}</Text>;
     }
     const dataLenght = data?.pages.reduce((total, page) => total + page.results.length, 0) || 0;
-    console.log(dataLenght);
 
     return (
         <InfiniteScroll
@@ -36,7 +31,7 @@ const GameGrid = () => {
                 {data?.pages.map((page, index) => (
                     <React.Fragment key={index}>
                         {page.results.map((game) => (
-                            <CardContainer>
+                            <CardContainer game={game} key={game.id}>
                                 <GameCard game={game} />
                             </CardContainer>
                         ))}

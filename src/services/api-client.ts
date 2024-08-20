@@ -1,5 +1,5 @@
-import axios, { AxiosRequestConfig } from "axios";
-import { number } from "prop-types";
+import axios, {AxiosRequestConfig} from "axios";
+import {number} from "prop-types";
 
 export interface dataShape<T> {
     count: number;
@@ -24,6 +24,10 @@ class APIClient<T> {
 
     getAll = (axiosParams?: AxiosRequestConfig) => {
         return axiosRequest.get<T>(this.endPoint, axiosParams).then((res) => res.data);
+    };
+
+    getById = (id: string) => {
+        return axiosRequest.get(`${this.endPoint}/${id}`).then((res) => res.data);
     };
 }
 

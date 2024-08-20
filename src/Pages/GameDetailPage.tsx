@@ -1,9 +1,18 @@
-
+import { Heading, Text } from "@chakra-ui/react";
+import { useParams } from "react-router-dom";
+import useGame from "../hooks/useGame";
 
 const GameDetailPage = () => {
-  return (
-    <div>GameDetailPage</div>
-  )
-}
+    const {slug} = useParams();
 
-export default GameDetailPage
+    const {data} = useGame(slug as string);
+
+    return (
+        <>
+            <Heading>{data?.name}</Heading>
+            <Text>{data?.description_raw}</Text>
+        </>
+    );
+};
+
+export default GameDetailPage;

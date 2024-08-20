@@ -5,8 +5,8 @@ import ToggleMode from "./ToggleMode";
 
 const Navbar = () => {
     return (
-        <HStack padding={4} >
-            <Image src={logo} boxSize="60px" />
+        <HStack padding={4}>
+            <Image  src={logo} boxSize="60px" />
             <SearchBar />
             <ToggleMode />
         </HStack>
