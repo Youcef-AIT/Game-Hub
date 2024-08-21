@@ -3,11 +3,19 @@ import {useInfiniteQuery} from "@tanstack/react-query";
 import useGameQueryStore from "../components/Games/Store";
 import APIClient, {dataShape} from "../services/api-client";
 import {Platform} from "./usePlatforms";
+import {genre} from "./useGeneres";
+
+interface Publisher {
+    name: string;
+    id: number;
+}
 
 export interface Games {
     id: number;
     name: string;
     slug: string;
+    genres: genre[];
+    publishers: Publisher[];
     background_image: string;
     parent_platforms: [{platform: Platform}];
     metacritic: number;
